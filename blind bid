@@ -1,0 +1,39 @@
+
+import art
+print(art.logo)
+bid_dictionary = {}
+cont = True
+def find_winner(bid_dictionary):
+    winner = ""
+    maximum = 0
+    for key in bid_dictionary:
+        if maximum < int(bid_dictionary[key]):
+            maximum = int(bid_dictionary[key])
+            winner = key
+
+    print(f"The winner is: {winner} with price: {maximum}")
+
+while cont:
+
+    name = input("Please enter your name:\n")
+    price = input("Please enter your price:\n &")
+    bid_dictionary[name] = price
+    shall_continue = input("Is there any other bidder? yes or no?\n").lower()
+    if shall_continue == "yes":
+        cont = True
+        print("\n" * 10)
+    elif shall_continue == "no":
+        cont = False
+        find_winner(bid_dictionary)
+
+    else:
+        cont = True
+        print("wrong input, try again")
+
+
+
+
+
+
+
+
