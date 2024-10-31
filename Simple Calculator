@@ -1,0 +1,57 @@
+import art
+print(art.logo)
+
+def add(n1, n2):
+    return n1 + n2
+
+def sub(n1, n2):
+    return n1 - n2
+
+def mul(n1, n2):
+    return n1 * n2
+
+def div(n1, n2):
+    return n1 / n2
+
+
+calculator = {"+": add,"-": sub, "*": mul, "/": div}
+f_number = float(input("what is your first number?\n"))
+shall_continue = True
+while shall_continue:
+    for symbol in calculator:
+        print(symbol)
+    cal = input("Pick an operation?\n")
+    s_number = float(input("what is your second number?\n"))
+    result = calculator[cal](f_number, s_number)
+    print(f"{f_number} {cal} {s_number} = {result}")
+    if_continue = input(f"Type y if you want to continue calculation with {result}? or type n if you want to start a new calculation\n")
+    if if_continue == "y":
+       f_number = result
+    elif if_continue == "n":
+       f_number = float(input("what is your first number?\n"))
+
+
+
+# shall_continue = "y"
+# f_number = int(input("what is your first number?\n"))
+# while shall_continue == "y":
+#     cal = input("what is your calculation operator? +, -, *, /\n")
+#     s_number = int(input("what is your second number?\n"))
+#
+#     if cal == "+":
+#        result = add(f_number, s_number)
+#     elif cal == "-":
+#        result = sub(f_number, s_number)
+#     elif cal == "*":
+#        result = mul(f_number, s_number)
+#     elif cal == "/":
+#        result = div(f_number, s_number)
+#     else:
+#        result = 98
+#
+#     print(result)
+#     shall_continue = input("do you want to continue? y or n?\n")
+#     f_number = result
+
+
+
