@@ -1,0 +1,79 @@
+def calculate_sum(num1, num2):
+    sum = num1 + num2
+    if (num1 == 11 or num2 == 11) and sum > 21:
+        sum -= 10
+    return sum
+
+
+
+import art
+import random
+cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
+
+play = input("do you want to play? y or n?\n").lower()
+if play == "y":
+    continue_play = True
+else:
+    continue_play = False
+
+while continue_play:
+    print(art.logo)
+    random_user1 = random.choice(cards)
+    random_user2 = random.choice(cards)
+    random_pc1 = random.choice(cards)
+    random_pc2 = random.choice(cards)
+    user_cards = [random_user1, random_user2]
+    pc_cards = [random_pc1, random_pc2]
+    user_input = "y"
+    if sum(user_cards) == 21:
+        if sum(pc_cards) != 21:
+            print("blackjack, you win!")
+            user_input = "n"
+        else:
+            print("Blackjack! draw!")
+            user_input = "n"
+
+    while user_input == "y":
+        user_total = calculate_sum(random_user1, random_user2)
+        print(f"your cards are ({user_cards}) with total {user_total}, Computer cards are: {random_pc1}")
+        if user_total > 21:
+           print("Computer Wins!")
+           user_input = "n"
+        else:
+           user_input = input("enter y if you want to hit and n if you want to pass\n").lower()
+           if user_input == "y":
+               random_user1 = user_total
+               random_user2 = random.choice(cards)
+               user_cards.append(random_user2)
+           else:
+               pc_running = True
+               if sum(pc_cards) == 21:
+                   print("black jack, pc wins!")
+                   pc_running = False
+
+               while pc_running:
+                   pc_total = calculate_sum(random_pc1, random_pc2)
+                   print(f"your cards are ({user_cards}) with total {user_total}, Computer cards are: {pc_cards}, with total {pc_total}")
+                   if pc_total < 17:
+                       random_pc1 = pc_total
+                       random_pc2 = random.choice(cards)
+                       pc_cards.append(random_pc2)
+                       pc_running = True
+                   else:
+                       if pc_total > 21:
+                           print("You Win!")
+
+                       elif user_total > pc_total:
+                           print("you win!")
+                       elif user_total == pc_total:
+                           print("Draw!")
+                       else:
+                           print("computer wins!")
+                       user_input = "n"
+                       pc_running = False
+
+    play = input("do you want to play again? y or n?\n").lower()
+    if play == "y":
+        continue_play = True
+    else:
+        continue_play = False
