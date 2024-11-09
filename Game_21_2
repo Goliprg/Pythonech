@@ -1,0 +1,93 @@
+import art
+import random
+
+def deal_cards():
+    cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
+    new_card = random.choice(cards)
+    return new_card
+
+
+def calculate_sum(cards_list):
+    total_sofar = sum(cards_list)
+    if (total_sofar == 21) and len(cards_list) == 2:
+        return 0, cards_list
+    else:
+        if 11 in cards_list and total_sofar > 21:
+            total_sofar -= 10
+            cards_list.remove(11)
+            cards_list.append(1)
+        return total_sofar, cards_list
+
+def compare(user_score, pc_score):
+    if user_score == pc_score:
+        print("Draw!")
+
+    elif user_score == 0:
+        print("blackjack! you win!")
+    elif pc_score == 0:
+        print("blackjack! computer wins!")
+    elif user_score > 21:
+        print("Computer wins!")
+    elif pc_score > 21:
+        print("You Win!")
+
+    elif user_score > pc_score:
+        print("you win!")
+
+    else:
+        print("computer wins!")
+
+
+play = input("do you want to play a game of Blackjack? y or n?\n").lower()
+if play == "y":
+    continue_play = True
+else:
+    continue_play = False
+
+while continue_play:
+    print("\n" * 10)
+    print(art.logo)
+    user_cards = []
+    pc_cards = []
+    user_total = -2
+    for n in range(2):
+        user_cards.append(deal_cards())
+    for n in range(2):
+        pc_cards.append(deal_cards())
+
+
+    user_input = "y"
+
+    pc_total = -2
+    while user_input == "y":
+        user_total, user_cards = calculate_sum(user_cards)
+        pc_total, pc_cards = calculate_sum(pc_cards)
+        if user_total == 0 or pc_total == 0 or user_total > 21:
+            user_input = "n"
+            continue_play = False
+
+        else:
+            print(f"your cards are ({user_cards}) with total {user_total}, Computer cards are: {pc_cards[0]}")
+            if user_total > 21:
+               print("Computer Wins!")
+               user_input = "n"
+            else:
+               user_input = input("enter y if you want to hit and n if you want to pass\n").lower()
+               if user_input == "y":
+                   user_cards.append(deal_cards())
+
+    while pc_total != 0 and pc_total <17:
+
+        pc_total, pc_cards = calculate_sum(pc_cards)
+        pc_cards.append(deal_cards())
+    if len(pc_cards) > 2:
+       pc_cards.remove(pc_cards[(len(pc_cards) - 1)])
+
+    print(f"your cards are ({user_cards}) with total {user_total}, Computer cards are: {pc_cards}, with total {pc_total}")
+    compare(user_total, pc_total)
+
+    play = input("do you want to play again? y or n?\n").lower()
+    if play == "y":
+        continue_play = True
+    else:
+        continue_play = False
