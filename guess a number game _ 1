@@ -1,0 +1,36 @@
+import random
+import art
+
+def guess_cycle(cyc):
+    user_guess = int(input("guess a number:\n"))
+    if user_guess == chosen_number:
+        print(f"correct! the number is: {user_guess}")
+        cyc = cycles + 1
+    else:
+        if user_guess > chosen_number:
+            print("too high")
+
+        if user_guess < chosen_number:
+            print("too low")
+        att_left = cycles - cyc
+        if att_left == 0:
+            print("You have run out of attempts!")
+        else:
+            print(f"you have {cycles - cyc} attempts left")
+    return cyc
+
+
+chosen_number = random.randint(1, 100)
+print(art.logo)
+difficulty = input("Do you chose easy or hard game?\n").lower()
+cycles = 0
+if difficulty == "easy":
+    cycles = 10
+elif difficulty == "hard":
+    cycles = 5
+n = 1
+
+while n <= cycles:
+    m = guess_cycle(n)
+    n = m
+    n += 1
