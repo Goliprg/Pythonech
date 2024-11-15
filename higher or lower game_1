@@ -1,0 +1,40 @@
+import game_data
+import art
+import random
+
+def pick_up():
+    chosen_one = random.choice(game_data.data)
+    game_data.data.remove(chosen_one)
+    return chosen_one
+
+def compare(choice_1,choice_2):
+    user_answer = input("which one has more followers? A or B").lower()
+    if choice_1["follower_count"] > choice_2["follower_count"]:
+        middle_variable = "a"
+    else:
+        middle_variable = "b"
+    if user_answer == middle_variable:
+        choice_1 = choice_2
+        print("That's right!")
+        return 1, choice_1
+    else:
+        print("Sorry! Wrong!")
+        return 0, choice_1
+
+
+
+print(art.logo)
+choice_a = pick_up()
+
+total_score = 0
+score = 1
+while score == 1:
+    print(f"A: {choice_a["name"]},{choice_a["description"]}, {choice_a["country"]} ")
+    print(art.vs)
+    choice_b = pick_up()
+    print(f"B: {choice_b["name"]},{choice_b["description"]}, {choice_b["country"]} ")
+
+    (score, choice_a) = compare(choice_a,choice_b)
+    total_score += score
+
+print(f"Game Over! Your Score is: {total_score}")
