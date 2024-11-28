@@ -1,0 +1,25 @@
+
+from menu import Menu, MenuItem
+from coffee_maker import CoffeeMaker
+from money_machine import MoneyMachine
+drink = MenuItem("name",0,0,0,0)
+order = Menu()
+action = CoffeeMaker()
+transaction = MoneyMachine()
+
+
+going_on = True
+while going_on:
+    user_order = input("what would you like? Latte, Cappuccino or espresso?").lower()
+    if user_order == "off":
+        going_on = False
+    elif user_order == "report":
+        print(action.report())
+        print(transaction.report())
+    else:
+        drink = order.find_drink(user_order)
+        if action.is_resource_sufficient(drink):
+            if transaction.make_payment(drink.cost):
+               action.make_coffee(drink)
+
+
