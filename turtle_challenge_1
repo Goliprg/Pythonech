@@ -1,0 +1,30 @@
+from turtle import Turtle, Screen
+from random import randint
+
+
+
+
+
+timmy = Turtle()
+
+timmy.shape("turtle")
+timmy.fillcolor("LightSeaGreen")
+screen = Screen()
+screen.colormode(255)
+timmy.penup()
+timmy.goto(-60,100)
+timmy.pendown()
+
+def draw_shape(number_of_sides):
+   angle = 360 / number_of_sides
+   for n in range(1,number_of_sides +1):
+      timmy.forward(100)
+      timmy.right(angle)
+
+for i in range(3,11):
+   timmy.pencolor((randint(0,255),randint(0,255),randint(0,255)))
+   timmy.seth(0)
+   draw_shape(i)
+
+
+screen.exitonclick()
