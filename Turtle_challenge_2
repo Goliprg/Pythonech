@@ -1,0 +1,46 @@
+from turtle import Turtle, Screen
+from random import choice, randint
+
+
+
+
+
+timmy = Turtle()
+
+timmy.shape("turtle")
+timmy.fillcolor("LightSeaGreen")
+timmy.pensize(5)
+timmy.speed(0)
+screen = Screen()
+screen.colormode(255)
+screen.screensize(600,600)
+
+
+def wall_checker(rand_dir):
+   if timmy.xcor() <= -270:
+      rand_dir.remove(180)
+   elif timmy.xcor() >= 270:
+      rand_dir.remove(0)
+   elif timmy.ycor() <= -270:
+      rand_dir.remove(270)
+   elif timmy.ycor() >= 270:
+      rand_dir.remove(90)
+
+   return rand_dir
+
+def move():
+   random_dir = [0, 90, 180, 270]
+   timmy.pencolor((randint(0, 255), randint(0, 255), randint(0, 255)))
+   random_dir = wall_checker(random_dir)
+   timmy.seth(choice(random_dir))
+   timmy.forward(30)
+
+i = True
+while i:
+   move()
+
+
+
+screen.exitonclick()
+
+
