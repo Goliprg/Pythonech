@@ -1,0 +1,25 @@
+from turtle import Turtle, Screen
+from random import randint
+
+
+timmy = Turtle()
+timmy.speed(0)
+screen = Screen()
+screen.colormode(255)
+
+
+def circle():
+   timmy.pencolor((randint(0, 255), randint(0, 255), randint(0, 255)))
+   timmy.circle(50)
+
+
+increment = 5
+for _ in range (1, int(360/increment)):
+   timmy.seth(timmy.heading()+increment)
+   circle()
+
+screen.exitonclick()
+
+
+
+
